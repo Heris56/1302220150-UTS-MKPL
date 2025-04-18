@@ -10,10 +10,7 @@ import java.util.List;
 public class Employee {
 
     private String employeeId;
-    private String firstName;
-    private String lastName;
-    private String idNumber;
-    private String address;
+    private PersonalData personalData;
 
     // ganti waktu join menggunakan Date
     private LocalDate DateJoined;
@@ -34,12 +31,9 @@ public class Employee {
     private List<String> childNames;
     private List<String> childIdNumbers;
 
-    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, LocalDate datejoined, boolean isForeigner, Gender gender) {
+    public Employee(String employeeId,PersonalData personalData, LocalDate datejoined, boolean isForeigner, Gender gender) {
         this.employeeId = employeeId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.idNumber = idNumber;
-        this.address = address;
+        this.personalData = personalData;
         this.DateJoined = datejoined;
         this.isForeigner = isForeigner;
         this.gender = gender;
@@ -83,7 +77,7 @@ public class Employee {
 
     public void setSpouse(String spouseName, String spouseIdNumber) {
         this.spouseName = spouseName;
-        this.spouseIdNumber = idNumber;
+        this.spouseIdNumber = spouseIdNumber;
     }
 
     public void addChild(String childName, String childIdNumber) {
