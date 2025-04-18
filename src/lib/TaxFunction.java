@@ -38,9 +38,9 @@ public class TaxFunction {
         
         // jika pegawai menikah penghasilan yang tidak kena pajak bertambah base + spouse exclusion
         if (isMarried) {
-            tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - (BASE_EXCLUSION + SPOUSE_EXCLUSION + (numberOfChildren * CHILD_EXCLUSION))));
+            tax = (int) Math.round(TAX_RATE * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - (BASE_EXCLUSION + SPOUSE_EXCLUSION + (numberOfChildren * CHILD_EXCLUSION))));
         } else {
-            tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - 54000000));
+            tax = (int) Math.round(TAX_RATE * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - 54000000));
         }
 
         if (tax < 0) {
