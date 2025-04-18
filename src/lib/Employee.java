@@ -31,6 +31,7 @@ public class Employee {
     private List<String> childNames;
     private List<String> childIdNumbers;
 
+    // memperbaiki bad smells long parameter list
     public Employee(String employeeId, PersonalData personalData, LocalDate datejoined, boolean isForeigner, Gender gender) {
         this.employeeId = employeeId;
         this.personalData = personalData;
