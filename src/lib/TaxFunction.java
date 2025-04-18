@@ -21,7 +21,6 @@ public class TaxFunction {
     private static final int SPOUSE_EXCLUSION = 4500000;
     private static final int CHILD_EXCLUSION = 4500000;
     private static final double TAX_RATE = 0.05;
-    private static final double FOREIGNER_MULTIPLIER = 1.5;
 
     public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
 
@@ -35,13 +34,9 @@ public class TaxFunction {
             numberOfChildren = 3;
         }
         
-        int yearlyIncome = (monthlySalary + otherMonthlyIncome) * numberOfMonthWorking;
-        
-        // base penghasilan yang tidak kena pajak
-        int nonTaxIncome = BASE_EXCLUSION;
+
         
         // jika pegawai menikah penghasilan yang tidak kena pajak bertambah base + spouse exclusion
-
         if (isMarried) {
             tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - (BASE_EXCLUSION + SPOUSE_EXCLUSION + (numberOfChildren * CHILD_EXCLUSION))));
         } else {
