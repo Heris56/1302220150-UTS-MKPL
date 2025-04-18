@@ -11,36 +11,25 @@ public class Employee {
 
     private String employeeId;
     private PersonalData personalData;
-
     // ganti waktu join menggunakan Date
-    private LocalDate DateJoined;
+    private LocalDate dateJoined;
     private int monthWorkingInYear;
-
     private boolean isForeigner;
-
     // ganti tipe boolean untuk gender menjadi enum
     private Gender gender;
-
     private int monthlySalary;
     private int otherMonthlyIncome;
     private int annualDeductible;
-
-    private String spouseName;
-    private String spouseIdNumber;
-
-    private List<String> childNames;
-    private List<String> childIdNumbers;
+    private Spouse spouse;
+    private List<Child> children = new LinkedList<>();
 
     // memperbaiki bad smells long parameter list
     public Employee(String employeeId, PersonalData personalData, LocalDate datejoined, boolean isForeigner, Gender gender) {
         this.employeeId = employeeId;
         this.personalData = personalData;
-        this.DateJoined = datejoined;
+        this.dateJoined = datejoined;
         this.isForeigner = isForeigner;
         this.gender = gender;
-
-        childNames = new LinkedList<String>();
-        childIdNumbers = new LinkedList<String>();
     }
 
     /**
@@ -82,13 +71,11 @@ public class Employee {
     }
 
     public void setSpouse(String spouseName, String spouseIdNumber) {
-        this.spouseName = spouseName;
-        this.spouseIdNumber = spouseIdNumber;
+        this.spouse = new Spouse(spouseName, spouseIdNumber);
     }
 
     public void addChild(String childName, String childIdNumber) {
-        childNames.add(childName);
-        childIdNumbers.add(childIdNumber);
+        this.children.add(new Child(childName, childIdNumber));
     }
 
     public int getAnnualIncomeTax() {
@@ -96,12 +83,12 @@ public class Employee {
         //Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
         LocalDate date = LocalDate.now();
 
-        if (date.getYear() == DateJoined.getYear()) {
-            monthWorkingInYear = (int) ChronoUnit.MONTHS.between(DateJoined, date);
+        if (date.getYear() == dateJoined.getYear()) {
+            monthWorkingInYear = (int) ChronoUnit.MONTHS.between(dateJoined, date);
         } else {
             monthWorkingInYear = 12;
         }
 
-        return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+        return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouse.equals(""), children.size());
     }
 }
