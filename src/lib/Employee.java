@@ -49,22 +49,20 @@ public class Employee {
      * asing gaji bulanan diperbesar sebanyak 50%
      */
     public void setMonthlySalary(Grade grade) {
+        double baseSalary = 0;
         if (grade == grade.Grade1) {
-            monthlySalary = 3000000;
-            if (isForeigner) {
-                monthlySalary = (int) (3000000 * 1.5);
-            }
+            baseSalary = 3000000;
         } else if (grade == grade.Grade2) {
-            monthlySalary = 5000000;
-            if (isForeigner) {
-                monthlySalary = (int) (3000000 * 1.5);
-            }
+            baseSalary = 5000000;
         } else if (grade == grade.Grade3) {
-            monthlySalary = 7000000;
-            if (isForeigner) {
-                monthlySalary = (int) (3000000 * 1.5);
-            }
+            baseSalary = 7000000;
         }
+        
+        if(isForeigner){
+            baseSalary = baseSalary * 1.5;
+        }
+        
+        monthlySalary = (int) baseSalary;
     }
 
     public void setAnnualDeductible(int deductible) {
