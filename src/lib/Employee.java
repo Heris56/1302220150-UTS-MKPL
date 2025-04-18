@@ -77,6 +77,10 @@ public class Employee {
     public void addChild(String childName, String childIdNumber) {
         this.children.add(new Child(childName, childIdNumber));
     }
+    
+    public boolean isMarried() {
+    return spouse != null && !spouse.isEmpty();
+}
 
     public int getAnnualIncomeTax() {
 
@@ -88,7 +92,7 @@ public class Employee {
         } else {
             monthWorkingInYear = 12;
         }
-
-        return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouse.equals(""), children.size());
+        
+        return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, isMarried(), children.size());
     }
 }
