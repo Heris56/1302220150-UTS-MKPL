@@ -9,6 +9,7 @@ package lib;
  * @author Haikal
  */
 public class Child {
+
     private String name;
     private String idNumber;
 
