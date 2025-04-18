@@ -31,7 +31,7 @@ public class Employee {
     private List<String> childNames;
     private List<String> childIdNumbers;
 
-    public Employee(String employeeId,PersonalData personalData, LocalDate datejoined, boolean isForeigner, Gender gender) {
+    public Employee(String employeeId, PersonalData personalData, LocalDate datejoined, boolean isForeigner, Gender gender) {
         this.employeeId = employeeId;
         this.personalData = personalData;
         this.DateJoined = datejoined;
@@ -49,21 +49,28 @@ public class Employee {
      * asing gaji bulanan diperbesar sebanyak 50%
      */
     public void setMonthlySalary(Grade grade) {
-        double baseSalary = 0;
-        if (grade == grade.Grade1) {
-            baseSalary = 3000000;
-        } else if (grade == grade.Grade2) {
-            baseSalary = 5000000;
-        } else if (grade == grade.Grade3) {
-            baseSalary = 7000000;
-        }
-        
-        if(isForeigner){
-            baseSalary = baseSalary * 1.5;
-        }
-        
-        monthlySalary = (int) baseSalary;
+        int baseSalary = getBaseSalary(grade);
+        monthlySalary = ForeignerSalary(baseSalary);
     }
+
+    public int getBaseSalary(Grade grade) {
+        return switch (grade) {
+            case Grade1 ->
+                3_000_000;
+            case Grade2 ->
+                5_000_000;
+            case Grade3 ->
+                7_000_000;
+        };
+    }
+    
+    public int ForeignerSalary(int Salary){
+      if(isForeigner){
+          return (int) (Salary * 1.5);
+      }else{
+          return Salary;
+      }
+    };
 
     public void setAnnualDeductible(int deductible) {
         this.annualDeductible = deductible;
